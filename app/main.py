@@ -21,20 +21,20 @@ class Distance:
     def __iadd__(self, other: object | float) -> "Distance":
         if isinstance(other, Distance):
             self.km += other.km
-        else :
-            try :
-                self.km += other
-            except (TypeError, ValueError):
-                return NotImplemented
+            return self
+        try :
+            self.km += other
+        except (TypeError, ValueError):
+            return NotImplemented
         return self
 
-    def __mul__(self, other: object | float) -> "Distance":
+    def __mul__(self, other: int | float) -> "Distance":
         try :
             return Distance(self.km * other)
         except (TypeError, ValueError):
             return NotImplemented
 
-    def __truediv__(self, other: object | float) -> "Distance":
+    def __truediv__(self, other: int | float) -> "Distance":
         try :
             return Distance(round(self.km / other, 2))
         except (TypeError, ValueError, ZeroDivisionError):
