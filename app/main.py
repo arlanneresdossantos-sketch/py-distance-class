@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 class Distance:
     def __init__(self, km: int | float) -> None:
         self.km = km
@@ -10,7 +13,7 @@ class Distance:
         km_str = str(int(self.km)) if self.km.is_integer() else str(self.km)
         return f"Distance(km={km_str})"
 
-    def __add__(self, other: object | float) -> Distance | int | float:
+    def __add__(self, other: object | float) -> "Distance":
         if isinstance(other, Distance):
             return Distance(self.km + other.km)
         try :
@@ -18,7 +21,7 @@ class Distance:
         except (TypeError, ValueError):
             return NotImplemented
 
-    def __iadd__(self, other: object | float) -> Distance | int | float:
+    def __iadd__(self, other: object | float) -> "Distance":
         if isinstance(other, Distance):
             self.km += other.km
             return self
