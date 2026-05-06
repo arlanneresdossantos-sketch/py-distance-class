@@ -10,7 +10,7 @@ class Distance:
         km_str = str(int(self.km)) if self.km.is_integer() else str(self.km)
         return f"Distance(km={km_str})"
 
-    def __add__(self, other: object | float) -> "Distance":
+    def __add__(self, other: object | float) -> Distance | int | float:
         if isinstance(other, Distance):
             return Distance(self.km + other.km)
         try :
@@ -18,7 +18,7 @@ class Distance:
         except (TypeError, ValueError):
             return NotImplemented
 
-    def __iadd__(self, other: object | float) -> "Distance":
+    def __iadd__(self, other: object | float) -> Distance | int | float:
         if isinstance(other, Distance):
             self.km += other.km
             return self
@@ -59,7 +59,7 @@ class Distance:
     def __eq__(self, other: object) -> bool:
         if isinstance(other, Distance):
             return self.km == other.km
-        if isinstance(other, (int | float)):
+        if isinstance(other, (int, float)):
             return self.km == float(other)
         return NotImplemented
 
